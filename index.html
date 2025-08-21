@@ -1789,32 +1789,32 @@ const firebaseConfig = {
                 ].join(',');
             });
 
-// กำหนดค่า default เป็น start date + start time ของวันนี้
-const now = new Date();
-const defaultDateTime = now.toLocaleString('th-TH', { 
-    year: 'numeric', 
-    month: '2-digit', 
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit'
-}).replace(/[/: ]/g, '-'); // แทนที่ตัวอักษรที่ใช้ไม่ได้ในชื่อไฟล์
-
-let filename = `รายงานลำดับผู้เรียน_${defaultDateTime}.csv`;
-
-if (sessionSelect.value && sessionSelect.value !== currentActiveSessionId) {
-    const selectedSession = sessionSummaries.find(s => s.sessionId === sessionSelect.value);
-    if (selectedSession && selectedSession.startTime) {
-        const startDateTime = selectedSession.startTime.toDate().toLocaleString('th-TH', { 
-            year: 'numeric', 
-            month: '2-digit', 
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit'
-        }).replace(/[/: ]/g, '-');
-        
-        filename = `รายงานลำดับผู้เรียน_${startDateTime}.csv`;
-    }
-}
+            // กำหนดค่า default เป็น start date + start time ของวันนี้
+            const now = new Date();
+            const defaultDateTime = now.toLocaleString('th-TH', { 
+                year: 'numeric', 
+                month: '2-digit', 
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            }).replace(/[/: ]/g, '-'); // แทนที่ตัวอักษรที่ใช้ไม่ได้ในชื่อไฟล์
+            
+            let filename = `V11_รายงานรอบปัจจุบัน_${defaultDateTime}.csv`;
+            
+            if (sessionSelect.value && sessionSelect.value !== currentActiveSessionId) {
+                const selectedSession = sessionSummaries.find(s => s.sessionId === sessionSelect.value);
+                if (selectedSession && selectedSession.startTime) {
+                    const startDateTime = selectedSession.startTime.toDate().toLocaleString('th-TH', { 
+                        year: 'numeric', 
+                        month: '2-digit', 
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    }).replace(/[/: ]/g, '-');
+                    
+                    filename = `V11_รายงานลำดับผู้เรียนย้อนหลัง_${startDateTime}.csv`;
+                }
+            }
 
 
             const csvContent = [headers.map(escapeCsv).join(','), ...rows].join('\n');
